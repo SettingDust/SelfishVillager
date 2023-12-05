@@ -1,18 +1,6 @@
-import net.fabricmc.loom.task.AbstractRunTask
-
 plugins { alias(catalog.plugins.quilt.loom) }
 
 val id: String by rootProject.properties
-
-loom {
-    runs {
-        configureEach {
-            ideConfigGenerated(true)
-        }
-        named("client") { name("Quilt Client") }
-        named("server") { name("Quilt Server") }
-    }
-}
 
 repositories {
     maven {
@@ -33,7 +21,7 @@ dependencies {
     modRuntimeOnly(catalog.modmenu) { exclude(module = "fabric-loader") }
     modRuntimeOnly(catalog.yacl.fabric) { isTransitive = false }
 
-    modRuntimeOnly(project(":mod")) { isTransitive = false }
+    runtimeOnly(project(":mod", configuration = "namedElements")) { isTransitive = false }
     modRuntimeOnly(catalog.kinecraft.serialization)
 
     modRuntimeOnly(catalog.jade)
@@ -41,7 +29,7 @@ dependencies {
 }
 
 tasks {
-    withType<AbstractRunTask> { dependsOn(":mod:remapJar") }
+    classes { dependsOn(":mod:remapJar") }
 
     ideaSyncTask { enabled = true }
 }

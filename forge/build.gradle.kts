@@ -36,7 +36,8 @@ minecraft {
                     project,
                     CLEAN_ARTIFACT.format(mcpVersion),
                     true,
-                ) ?: throw RuntimeException("Cannot find clean minecraft artifact")
+                )
+                    ?: throw RuntimeException("Cannot find clean minecraft artifact")
             configureEach { property("connector.clean.path", cleanArtifactJar) }
         }
 
@@ -70,7 +71,7 @@ dependencies {
 
     runtimeOnly(fg.deobf(catalog.jade.get()))
     runtimeOnly(fg.deobf(catalog.reputation.get()))
-    runtimeOnly(fg.deobf(catalog.yacl.forge.get()) as ExternalModuleDependency) {
-        isTransitive = false
-    }
+    runtimeOnly(
+        fg.deobf(catalog.yacl.forge.get(), closureOf<ModuleDependency> { isTransitive = false })
+    )
 }

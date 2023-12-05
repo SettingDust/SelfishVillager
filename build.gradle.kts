@@ -1,3 +1,5 @@
+import org.jetbrains.gradle.ext.Gradle
+import org.jetbrains.gradle.ext.runConfigurations
 import org.jetbrains.gradle.ext.settings
 import org.jetbrains.gradle.ext.taskTriggers
 
@@ -44,4 +46,16 @@ spotless {
     }
 }
 
-idea.project.settings.taskTriggers { afterSync(":forge:genIntellijRuns") }
+idea {
+    project {
+        settings {
+            taskTriggers { afterSync(":forge:genIntellijRuns") }
+
+            runConfigurations {
+                create<Gradle>("Quilt Client") { taskNames = listOf(":quilt:runClient") }
+
+                create<Gradle>("Quilt Server") { taskNames = listOf(":quilt:runServer") }
+            }
+        }
+    }
+}
