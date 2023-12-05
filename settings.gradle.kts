@@ -104,6 +104,13 @@ dependencyResolutionManagement.versionCatalogs.create("catalog") {
      */
     library("reputation", "maven.modrinth", "your-reputation").version("0.2.4+jade.1.20")
     library("jade", "maven.modrinth", "jade").version("11.4.3")
+
+    library("kinecraft-serialization", "maven.modrinth", "kinecraft-serialization")
+        .version("1.1.8-fabric")
+
+    val yacl = "3.2.1+1.20"
+    library("yacl-fabric", "dev.isxander.yacl", "yet-another-config-lib-fabric").version(yacl)
+    library("yacl-forge", "dev.isxander.yacl", "yet-another-config-lib-forge").version(yacl)
 }
 
 plugins {

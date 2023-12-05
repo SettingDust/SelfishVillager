@@ -71,4 +71,7 @@ dependencies {
 
     runtimeOnly(fg.deobf(catalog.jade.get()))
     runtimeOnly(fg.deobf(catalog.reputation.get()))
+    runtimeOnly(fg.deobf(catalog.yacl.forge.get()) as ExternalModuleDependency) {
+        isTransitive = false
+    }
 }

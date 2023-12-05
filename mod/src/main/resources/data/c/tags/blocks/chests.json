@@ -1,0 +1,58 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:chest",
+    {
+      "id": "lootr:lootr_chest",
+      "required": false
+    },
+    {
+      "id": "lootcrates:common_chest_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:common_shulker_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:uncommon_chest_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:uncommon_shulker_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:rare_chest_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:rare_shulker_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:epic_chest_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:epic_shulker_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:ghost_chest_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:ghost_shulker_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:blaze_chest_loot_crate",
+      "required": false
+    },
+    {
+      "id": "lootcrates:blaze_shulker_loot_crate",
+      "required": false
+    }
+  ]
+}

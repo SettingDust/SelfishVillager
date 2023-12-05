@@ -37,6 +37,10 @@ dependencies {
 
     val modClientImplementation by configurations
     modClientImplementation(catalog.modmenu)
+    modClientImplementation(catalog.yacl.fabric) { isTransitive = false }
+
+    include(catalog.kinecraft.serialization)
+    modImplementation(catalog.kinecraft.serialization)
 
     modRuntimeOnly(catalog.jade)
     modRuntimeOnly(catalog.reputation)

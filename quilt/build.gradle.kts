@@ -29,6 +29,7 @@ dependencies {
     modRuntimeOnly(catalog.fabric.kotlin) { exclude(module = "fabric-loader") }
 
     modRuntimeOnly(catalog.modmenu) { exclude(module = "fabric-loader") }
+    modRuntimeOnly(catalog.yacl.fabric) { isTransitive = false }
 
     runtimeOnly(project(":mod")) { isTransitive = false }
 

@@ -1,0 +1,34 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:barrel",
+    {
+      "id": "lootr:lootr_barrel",
+      "required": false
+    },
+    {
+      "id": "lootr:common_loot_barrel",
+      "required": false
+    },
+    {
+      "id": "lootr:uncommon_loot_barrel",
+      "required": false
+    },
+    {
+      "id": "lootr:rare_loot_barrel",
+      "required": false
+    },
+    {
+      "id": "lootr:epic_loot_barrel",
+      "required": false
+    },
+    {
+      "id": "lootr:ghost_loot_barrel",
+      "required": false
+    },
+    {
+      "id": "lootr:blaze_loot_barrel",
+      "required": false
+    }
+  ]
+}

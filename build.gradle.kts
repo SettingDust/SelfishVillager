@@ -28,6 +28,7 @@ subprojects {
         maven("https://maven.terraformersmc.com/releases") {
             content { includeGroup("com.terraformersmc") }
         }
+        maven("https://maven.isxander.dev/releases")
     }
 }
 

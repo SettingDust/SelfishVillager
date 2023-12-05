@@ -1,12 +1,12 @@
-## Feature
- - Only develop fabric but targeting quilt and forge(with Connector) as well with testing modules. 
- - Self updating template with GitHub action
- - SemVer and Conventional Commit for Git stuffs and generating changelog
- - Spotless for code styling
- - Git hook for spotless apply, check and conventional commit validation
- - Version catalog with Kotlin Script in settings.gradle.kts
- - Automate publish with mc-publish action. *Need configure secrets for platform
- - Auto checking dependencies version with dependabot
+# Selfish Villager
 
-## Usage
-Use this template and type in the name, description. The GitHub action will provide a repo with correct metadata
+Original Inspired by Dawncraft and gossip by [You Thief](https://modrinth.com/datapack/you-thief!)
+
+This villagers will remember if they seeing blocks breaking without tag `#selfish_villager:non_property` and blocks interact with `#selfish_villager:interactable_property` in specify range in `#village` structures.  
+They will remember the things and [gossiping](https://minecraft.fandom.com/wiki/Villager#Gossiping)  
+Recommend install https://modrinth.com/mod/your-reputation for visible reputation.
+
+By default
+- `#selfish_villager:non_property` contains `"#c:grass"`, `"#c:grass_like"`, `"#c:flowers"`.
+- `#selfish_villager:interactable_property` contains `"#c:chests`, `#c:barrel`.  
+  See the data folder on GitHub for more info
