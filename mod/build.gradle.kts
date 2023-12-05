@@ -39,8 +39,10 @@ dependencies {
     modClientImplementation(catalog.modmenu)
     modClientImplementation(catalog.yacl.fabric) { isTransitive = false }
 
-    include(catalog.kinecraft.serialization)
-    modImplementation(catalog.kinecraft.serialization)
+    catalog.kinecraft.serialization.also {
+        include(it)
+        modImplementation(it)
+    }
 
     modRuntimeOnly(catalog.jade)
     modRuntimeOnly(catalog.reputation)

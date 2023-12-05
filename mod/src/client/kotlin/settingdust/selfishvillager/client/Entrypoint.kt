@@ -18,6 +18,7 @@ object ModMenuEntrypoint : ModMenuApi {
         get() {
             SelfishVillager.Config.load()
             return YetAnotherConfigLib.createBuilder()
+                .title(Text.translatable("${SelfishVillager.ID}.config.title"))
                 .category(
                     ConfigCategory.createBuilder()
                         .name(Text.translatable("${SelfishVillager.ID}.config.general"))

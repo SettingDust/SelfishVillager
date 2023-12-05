@@ -1,0 +1,7 @@
+{
+  "selfish_villager.config.title": "Selfish Villager",
+  "selfish_villager.config.general": "General",
+  "selfish_villager.config.general.ray_tracing": "Ray Tracing",
+  "selfish_villager.config.general.detect_range": "Villager detect range",
+  "selfish_villager.config.general.sneak_range": "Villager detect range when sneaking"
+}

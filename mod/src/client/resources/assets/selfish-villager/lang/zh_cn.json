@@ -1,4 +1,5 @@
 {
+  "selfish_villager.config.title": "自私的村民",
   "selfish_villager.config.general": "通用",
   "selfish_villager.config.general.ray_tracing": "视线追踪",
   "selfish_villager.config.general.detect_range": "村民侦测范围",

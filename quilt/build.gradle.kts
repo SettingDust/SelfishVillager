@@ -6,7 +6,9 @@ val id: String by rootProject.properties
 
 loom {
     runs {
-        configureEach { ideConfigGenerated(true) }
+        configureEach {
+            ideConfigGenerated(true)
+        }
         named("client") { name("Quilt Client") }
         named("server") { name("Quilt Server") }
     }
@@ -31,7 +33,8 @@ dependencies {
     modRuntimeOnly(catalog.modmenu) { exclude(module = "fabric-loader") }
     modRuntimeOnly(catalog.yacl.fabric) { isTransitive = false }
 
-    runtimeOnly(project(":mod")) { isTransitive = false }
+    modRuntimeOnly(project(":mod")) { isTransitive = false }
+    modRuntimeOnly(catalog.kinecraft.serialization)
 
     modRuntimeOnly(catalog.jade)
     modRuntimeOnly(catalog.reputation)
