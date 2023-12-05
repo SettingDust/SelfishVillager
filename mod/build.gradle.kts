@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
+
 plugins {
     alias(catalog.plugins.fabric.loom)
 
@@ -55,6 +57,8 @@ java {
     // if it is present.
     // If you remove this line, sources will not be generated.
     withSourcesJar()
+
+    base { archivesName = rootProject.archivesName }
 }
 
 val metadata =
