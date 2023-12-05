@@ -37,6 +37,9 @@ dependencies {
 
     val modClientImplementation by configurations
     modClientImplementation(catalog.modmenu)
+
+    modRuntimeOnly(catalog.jade)
+    modRuntimeOnly(catalog.reputation)
 }
 
 kotlin { jvmToolchain(17) }

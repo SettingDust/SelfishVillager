@@ -21,6 +21,10 @@ subprojects {
     version = rootProject.version
 
     repositories {
+        exclusiveContent {
+            forRepository { maven("https://api.modrinth.com/maven") { name = "Modrinth" } }
+            filter { includeGroup("maven.modrinth") }
+        }
         maven("https://maven.terraformersmc.com/releases") {
             content { includeGroup("com.terraformersmc") }
         }

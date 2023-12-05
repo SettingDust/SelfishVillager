@@ -31,6 +31,9 @@ dependencies {
     modRuntimeOnly(catalog.modmenu) { exclude(module = "fabric-loader") }
 
     runtimeOnly(project(":mod")) { isTransitive = false }
+
+    modRuntimeOnly(catalog.jade)
+    modRuntimeOnly(catalog.reputation)
 }
 
 tasks {

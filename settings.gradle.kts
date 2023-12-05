@@ -96,6 +96,14 @@ dependencyResolutionManagement.versionCatalogs.create("catalog") {
     library("forgified-fabric-api", "dev.su5ed.sinytra.fabric-api", "fabric-api")
         .version("$fabricApi+1.10.3+$minecraft")
     library("connector-extras", "maven.modrinth", "connector-extras").version("1.7.0+$minecraft")
+
+    /**
+     * ***********
+     * Libraries
+     * ************
+     */
+    library("reputation", "maven.modrinth", "your-reputation").version("0.2.4+jade.1.20")
+    library("jade", "maven.modrinth", "jade").version("11.4.3")
 }
 
 plugins {
