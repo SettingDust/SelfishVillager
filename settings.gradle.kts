@@ -106,7 +106,7 @@ dependencyResolutionManagement.versionCatalogs.create("catalog") {
     library("jade", "maven.modrinth", "jade").version("11.4.3")
 
     library("kinecraft-serialization", "maven.modrinth", "kinecraft-serialization")
-        .version("1.1.8-fabric")
+        .version("1.3.0-fabric")
 
     val yacl = "3.2.1+1.20"
     library("yacl-fabric", "dev.isxander.yacl", "yet-another-config-lib-fabric").version(yacl)

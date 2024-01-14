@@ -38,13 +38,10 @@ import settingdust.kinecraft.serialization.GsonElementSerializer
 fun init() {
     PlayerBlockBreakEvents.AFTER.register { world, player, pos, state, _ ->
         if (state.isIn(SelfishVillager.Tags.NON_PROPERTY)) return@register
-        val registry = world.registryManager[RegistryKeys.STRUCTURE]
         if (
             (world as ServerWorld)
                 .structureAccessor
-                .getStructureStarts(ChunkPos(pos)) {
-                    registry.getEntry(it).isIn(StructureTags.VILLAGE)
-                }
+                .getStructureStarts(ChunkPos(pos)) { true }
                 .none { it.boundingBox.contains(pos) }
         )
             return@register
