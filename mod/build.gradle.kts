@@ -46,6 +46,8 @@ dependencies {
         modImplementation(it)
     }
 
+    modImplementation(catalog.guard.villagers)
+
     modRuntimeOnly(catalog.jade)
     modRuntimeOnly(catalog.reputation)
 }

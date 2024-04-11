@@ -2,6 +2,9 @@ apply(
     from = "https://github.com/SettingDust/FabricKotlinTemplate/raw/main/common.settings.gradle.kts"
 )
 
+val minecraft = settings.extra["minecraft"]
+val kotlin = settings.extra["kotlin"]
+
 dependencyResolutionManagement.versionCatalogs.named("catalog") {
     library("reputation", "maven.modrinth", "your-reputation").version("0.2.4+jade.1.20")
     library("jade", "maven.modrinth", "jade").version("11.4.3")
@@ -12,12 +15,16 @@ dependencyResolutionManagement.versionCatalogs.named("catalog") {
     val yacl = "3.2.1+1.20"
     library("yacl-fabric", "dev.isxander.yacl", "yet-another-config-lib-fabric").version(yacl)
     library("yacl-forge", "dev.isxander.yacl", "yet-another-config-lib-forge").version(yacl)
+
+    // https://modrinth.com/mod/guard-villagers-(fabricquilt)/versions
+    library("guard-villagers", "maven.modrinth", "guard-villagers-(fabricquilt)")
+        .version("2.0.9-$minecraft")
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
     // https://github.com/DanySK/gradle-pre-commit-git-hooks
-    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.0.3"
+    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.0.4"
 }
 
 gitHooks {

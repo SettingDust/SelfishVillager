@@ -12,6 +12,7 @@ import kotlinx.serialization.modules.contextual
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.passive.VillagerEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.ProjectileUtil
@@ -49,7 +50,11 @@ fun init() {
         if (villagerEntities.isEmpty()) return@register
         player.playSound(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 1f, 1f)
         for (villagerEntity in villagerEntities) {
-            villagerEntity.gossip.startGossip(player.uuid, VillageGossipType.MINOR_NEGATIVE, 10)
+            villagerEntity.`selfishvillager$gossips`.startGossip(
+                player.uuid,
+                VillageGossipType.MINOR_NEGATIVE,
+                10
+            )
         }
     }
 
@@ -76,7 +81,11 @@ fun init() {
         if (villagerEntities.isEmpty()) return@register ActionResult.PASS
         player.playSound(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 2f, 1f)
         for (villagerEntity in villagerEntities) {
-            villagerEntity.gossip.startGossip(player.uuid, VillageGossipType.MAJOR_NEGATIVE, 10)
+            villagerEntity.`selfishvillager$gossips`.startGossip(
+                player.uuid,
+                VillageGossipType.MAJOR_NEGATIVE,
+                10
+            )
         }
         return@register ActionResult.PASS
     }
@@ -86,14 +95,16 @@ private fun visableVillagers(
     world: World,
     player: PlayerEntity,
     pos: BlockPos
-): List<VillagerEntity> {
+): List<GossipHolder> {
     val range =
         if (player.isSneaking) SelfishVillager.Config.general.sneakRange
         else SelfishVillager.Config.general.detectRange
-    return world.getEntitiesByClass(VillagerEntity::class.java, Box(pos, pos).expand(range)) {
-        villager ->
+    return world.getEntitiesByClass(
+        (GossipHolder::class.java as Class<LivingEntity>),
+        Box(pos, pos).expand(range)
+    ) { villager ->
         if (!SelfishVillager.Config.general.rayTracing) return@getEntitiesByClass true
-        if (villager.isSleeping) return@getEntitiesByClass false
+        if (villager is VillagerEntity && villager.isSleeping) return@getEntitiesByClass false
         val targetVector = player.pos.subtract(villager.pos)
         val angle =
             Vector3d(
@@ -123,7 +134,7 @@ private fun visableVillagers(
         (angle <= 70 || angle >= 290) &&
             entityHitResult?.type != HitResult.Type.MISS &&
             blockHitResult.type != HitResult.Type.BLOCK
-    }
+    } as List<GossipHolder>
 }
 
 object SelfishVillager {
