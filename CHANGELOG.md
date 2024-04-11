@@ -1,4 +1,9 @@
 
+## [0.3.1] - 2024-04-11
+### :bug: Bug Fixes
+- [`3820b04`](https://github.com/SettingDust/SelfishVillager/commit/3820b046f3dd7d9bf9104b21b760d69722ab1409) - mixins are in wrong source root *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+
 ## [0.3.0] - 2024-04-11
 ### :sparkles: New Features
 - [`f2f76e2`](https://github.com/SettingDust/SelfishVillager/commit/f2f76e2c8245dd6e3d4e42baf08464b354539980) - support guard villager *(commit by [@SettingDust](https://github.com/SettingDust))*
@@ -33,3 +38,4 @@
 [0.1.2]: https://github.com/SettingDust/SelfishVillager/compare/0.1.1...0.1.2
 [0.2.0]: https://github.com/SettingDust/SelfishVillager/compare/0.1.2...0.2.0
 [0.3.0]: https://github.com/SettingDust/SelfishVillager/compare/0.2.0...0.3.0
+[0.3.1]: https://github.com/SettingDust/SelfishVillager/compare/0.3.0...0.3.1
