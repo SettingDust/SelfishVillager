@@ -13,6 +13,8 @@ val author: String by rootProject.properties
 val description: String by rootProject.properties
 
 loom {
+    mixin { useLegacyMixinAp = false }
+
     splitEnvironmentSourceSets()
 
     mods {
@@ -28,6 +30,8 @@ loom {
         named("server") { name("Fabric Server") }
     }
 }
+
+kotlin { jvmToolchain(17) }
 
 dependencies {
     minecraft(catalog.minecraft)
@@ -51,8 +55,6 @@ dependencies {
     modRuntimeOnly(catalog.jade)
     modRuntimeOnly(catalog.reputation)
 }
-
-kotlin { jvmToolchain(17) }
 
 java {
     // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
@@ -79,6 +81,8 @@ val metadata =
     )
 
 tasks {
+    compileKotlin { println(excludes) }
+
     processResources {
         inputs.properties(metadata)
         filesMatching(listOf("fabric.mod.json", "*.mixins.json")) { expand(metadata) }
