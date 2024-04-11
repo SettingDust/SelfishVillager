@@ -1,4 +1,13 @@
 
+## [0.3.0] - 2024-04-11
+### :sparkles: New Features
+- [`f2f76e2`](https://github.com/SettingDust/SelfishVillager/commit/f2f76e2c8245dd6e3d4e42baf08464b354539980) - support guard villager *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+### :wrench: Chores
+- [`78c22e6`](https://github.com/SettingDust/SelfishVillager/commit/78c22e6ee46569eb19d63dddde77407793d5f202) - **deps**: bump org.danilopianini.gradle-pre-commit-git-hooks *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`4a881af`](https://github.com/SettingDust/SelfishVillager/commit/4a881af165d4612d76ea63ab88a167e3f54ab59f) - **deps**: bump dependencies *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+
 ## [0.2.0] - 2024-01-14
 ### :sparkles: New Features
 - [`c219fe2`](https://github.com/SettingDust/SelfishVillager/commit/c219fe256147c7072226a80cc18c45f02bc0242a) - detect all structures instead of only village *(commit by [@SettingDust](https://github.com/SettingDust))*
@@ -23,3 +32,4 @@
 
 [0.1.2]: https://github.com/SettingDust/SelfishVillager/compare/0.1.1...0.1.2
 [0.2.0]: https://github.com/SettingDust/SelfishVillager/compare/0.1.2...0.2.0
+[0.3.0]: https://github.com/SettingDust/SelfishVillager/compare/0.2.0...0.3.0
