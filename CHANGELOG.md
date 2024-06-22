@@ -1,4 +1,12 @@
 
+## [0.4.0] - 2024-06-22
+### :recycle: Refactors
+- [`c297cb1`](https://github.com/SettingDust/SelfishVillager/commit/c297cb15e79bc5199c0e2ceb444cf188195da487) - port to 1.21 *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+### :wrench: Chores
+- [`29d06fd`](https://github.com/SettingDust/SelfishVillager/commit/29d06fdaa41b416e2a2ff0ed5d6a515556bbc6da) - **deps**: bump org.danilopianini.gradle-pre-commit-git-hooks *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [0.3.1] - 2024-04-11
 ### :bug: Bug Fixes
 - [`3820b04`](https://github.com/SettingDust/SelfishVillager/commit/3820b046f3dd7d9bf9104b21b760d69722ab1409) - mixins are in wrong source root *(commit by [@SettingDust](https://github.com/SettingDust))*
@@ -39,3 +47,4 @@
 [0.2.0]: https://github.com/SettingDust/SelfishVillager/compare/0.1.2...0.2.0
 [0.3.0]: https://github.com/SettingDust/SelfishVillager/compare/0.2.0...0.3.0
 [0.3.1]: https://github.com/SettingDust/SelfishVillager/compare/0.3.0...0.3.1
+[0.4.0]: https://github.com/SettingDust/SelfishVillager/compare/0.3.1...0.4.0
