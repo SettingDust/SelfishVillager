@@ -1,65 +1,28 @@
-apply(
-    from = "https://github.com/SettingDust/FabricKotlinTemplate/raw/main/common.settings.gradle.kts"
-)
+val minecraft = "1.21"
+extra["minecraft"] = minecraft
 
-val minecraft = settings.extra["minecraft"]
-val kotlin = settings.extra["kotlin"]
+apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/common.gradle.kts")
+
+apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/kotlin.gradle.kts")
+
+apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/fabric.gradle.kts")
+
+apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/modmenu.gradle.kts")
+apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/yacl.gradle.kts")
 
 dependencyResolutionManagement.versionCatalogs.named("catalog") {
-    library("reputation", "maven.modrinth", "your-reputation").version("0.2.4+jade.1.20")
-    library("jade", "maven.modrinth", "jade").version("11.4.3")
-
-    library("kinecraft-serialization", "maven.modrinth", "kinecraft-serialization")
-        .version("1.3.0-fabric")
-
-    val yacl = "3.2.1+1.20"
-    library("yacl-fabric", "dev.isxander.yacl", "yet-another-config-lib-fabric").version(yacl)
-    library("yacl-forge", "dev.isxander.yacl", "yet-another-config-lib-forge").version(yacl)
+    library("reputation", "maven.modrinth", "reputation-viewer").version("0.2.0")
+    library("jade", "maven.modrinth", "jade").version("15.0.4+fabric")
 
     // https://modrinth.com/mod/guard-villagers-(fabricquilt)/versions
     library("guard-villagers", "maven.modrinth", "guard-villagers-(fabricquilt)")
-        .version("2.0.9-$minecraft")
+        .version("2.1.1-$minecraft")
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
-    // https://github.com/DanySK/gradle-pre-commit-git-hooks
-    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.0.7"
-}
-
-gitHooks {
-    preCommit {
-        from {
-            //             git diff --cached --name-only --diff-filter=ACMR | while read -r a; do
-            // echo ${'$'}(readlink -f ${"$"}a); ./gradlew spotlessApply -q
-            // -PspotlessIdeHook="${'$'}(readlink -f ${"$"}a)" </dev/null; done
-            """
-            export JAVA_HOME="${System.getProperty("java.home")}"
-            ./gradlew spotlessApply spotlessCheck
-            """
-                .trimIndent()
-        }
-    }
-    commitMsg { conventionalCommits { defaultTypes() } }
-    hook("post-commit") {
-        from {
-            """
-            files="${'$'}(git show --pretty= --name-only | tr '\n' ' ')"
-            git add ${'$'}files
-            git -c core.hooksPath= commit --amend -C HEAD
-            """
-                .trimIndent()
-        }
-    }
-    createHooks(true)
 }
 
 val name: String by settings
 
 rootProject.name = name
-
-include("mod")
-
-include("quilt")
-
-include("forge")

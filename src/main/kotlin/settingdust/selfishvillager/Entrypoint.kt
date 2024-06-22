@@ -1,14 +1,12 @@
 package settingdust.selfishvillager
 
+import com.mojang.serialization.JsonOps
 import kotlin.io.path.createDirectories
 import kotlin.io.path.createFile
 import kotlin.io.path.div
-import kotlin.io.path.readText
+import kotlin.io.path.reader
 import kotlin.io.path.writeText
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.contextual
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.fabricmc.loader.api.FabricLoader
@@ -22,8 +20,10 @@ import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
+import net.minecraft.text.TextCodecs
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Identifier
+import net.minecraft.util.JsonHelper
 import net.minecraft.util.hit.HitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -33,28 +33,22 @@ import net.minecraft.village.VillageGossipType
 import net.minecraft.world.BlockStateRaycastContext
 import net.minecraft.world.World
 import org.joml.Vector3d
-import settingdust.kinecraft.serialization.ComponentSerializer
-import settingdust.kinecraft.serialization.GsonElementSerializer
+import org.quiltmc.qkl.library.serialization.CodecFactory
 
 fun init() {
     PlayerBlockBreakEvents.AFTER.register { world, player, pos, state, _ ->
         if (state.isIn(SelfishVillager.Tags.NON_PROPERTY)) return@register
-        if (
-            (world as ServerWorld)
-                .structureAccessor
-                .getStructureStarts(ChunkPos(pos)) { true }
-                .none { it.boundingBox.contains(pos) }
-        )
+        if ((world as ServerWorld)
+            .structureAccessor
+            .getStructureStarts(ChunkPos(pos)) { true }
+            .none { it.boundingBox.contains(pos) })
             return@register
         val villagerEntities = visableVillagers(world, player, pos)
         if (villagerEntities.isEmpty()) return@register
-        player.playSound(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 1f, 1f)
+        player.playSoundToPlayer(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 1f, 1f)
         for (villagerEntity in villagerEntities) {
             villagerEntity.`selfishvillager$gossips`.startGossip(
-                player.uuid,
-                VillageGossipType.MINOR_NEGATIVE,
-                10
-            )
+                player.uuid, VillageGossipType.MINOR_NEGATIVE, 10)
         }
     }
 
@@ -68,24 +62,17 @@ fun init() {
             return@register ActionResult.PASS
         val registry = world.registryManager[RegistryKeys.STRUCTURE]
         val pos = hitResult.blockPos
-        if (
-            world.structureAccessor
-                .getStructureStarts(ChunkPos(pos)) {
-                    registry.getEntry(it).isIn(StructureTags.VILLAGE)
-                }
-                .none { it.boundingBox.contains(pos) }
-        )
+        if (world.structureAccessor
+            .getStructureStarts(ChunkPos(pos)) { registry.getEntry(it).isIn(StructureTags.VILLAGE) }
+            .none { it.boundingBox.contains(pos) })
             return@register ActionResult.PASS
         val villagerEntities =
             visableVillagers(world, player, BlockPos.ofFloored(player.boundingBox.center))
         if (villagerEntities.isEmpty()) return@register ActionResult.PASS
-        player.playSound(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 2f, 1f)
+        player.playSoundToPlayer(SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.PLAYERS, 2f, 1f)
         for (villagerEntity in villagerEntities) {
             villagerEntity.`selfishvillager$gossips`.startGossip(
-                player.uuid,
-                VillageGossipType.MAJOR_NEGATIVE,
-                10
-            )
+                player.uuid, VillageGossipType.MAJOR_NEGATIVE, 10)
         }
         return@register ActionResult.PASS
     }
@@ -99,19 +86,14 @@ private fun visableVillagers(
     val range =
         if (player.isSneaking) SelfishVillager.Config.general.sneakRange
         else SelfishVillager.Config.general.detectRange
-    return world.getEntitiesByClass(
-        (GossipHolder::class.java as Class<LivingEntity>),
-        Box(pos, pos).expand(range)
-    ) { villager ->
+    return world.getEntitiesByClass(LivingEntity::class.java, Box(pos).expand(range)) { villager ->
+        if (villager !is GossipHolder) return@getEntitiesByClass false
         if (!SelfishVillager.Config.general.rayTracing) return@getEntitiesByClass true
         if (villager is VillagerEntity && villager.isSleeping) return@getEntitiesByClass false
         val targetVector = player.pos.subtract(villager.pos)
         val angle =
             Vector3d(
-                    villager.rotationVector.x,
-                    villager.rotationVector.y,
-                    villager.rotationVector.z
-                )
+                    villager.rotationVector.x, villager.rotationVector.y, villager.rotationVector.z)
                 .angle(Vector3d(targetVector.x, targetVector.y, targetVector.z)) * 180 /
                 MathHelper.PI
 
@@ -122,14 +104,14 @@ private fun visableVillagers(
                 player.pos,
                 player.boundingBox,
                 { it == player },
-                range * range
-            )
+                range * range)
         }
 
         val blockHitResult by lazy {
             world.raycast(
-                BlockStateRaycastContext(villager.eyePos, player.boundingBox.center) { it.isOpaque }
-            )
+                BlockStateRaycastContext(villager.eyePos, player.boundingBox.center) {
+                    it.isOpaque
+                })
         }
         (angle <= 70 || angle >= 290) &&
             entityHitResult?.type != HitResult.Type.MISS &&
@@ -141,10 +123,17 @@ object SelfishVillager {
 
     const val ID = "selfish_villager"
 
+    private val codecFactory = CodecFactory {
+        encodeDefaults = true
+        ignoreUnknownKeys = true
+
+        codecs { unnamed(TextCodecs.CODEC) }
+    }
+
     object Tags {
         val INTERACTABLE_PROPERTY =
-            TagKey.of(RegistryKeys.BLOCK, Identifier(ID, "interactable_property"))!!
-        val NON_PROPERTY = TagKey.of(RegistryKeys.BLOCK, Identifier(ID, "non_property"))!!
+            TagKey.of(RegistryKeys.BLOCK, Identifier.of(ID, "interactable_property"))!!
+        val NON_PROPERTY = TagKey.of(RegistryKeys.BLOCK, Identifier.of(ID, "non_property"))!!
     }
 
     @Serializable
@@ -152,22 +141,15 @@ object SelfishVillager {
         var rayTracing: Boolean = true,
         var detectRange: Double = 16.0,
         var sneakRange: Double = 8.0
-    )
+    ) {
+        companion object {
+            val CODEC = codecFactory.create<GeneralConfig>()
+        }
+    }
 
     data object Config {
         var general = GeneralConfig()
             private set
-
-        private val json = Json {
-            encodeDefaults = true
-            ignoreUnknownKeys = true
-            isLenient = true
-            serializersModule = SerializersModule {
-                contextual(ComponentSerializer)
-                contextual(GsonElementSerializer)
-            }
-            prettyPrint = true
-        }
 
         private val configDir = FabricLoader.getInstance().configDir / ID
         private val generalConfigPath = configDir / "general.json"
@@ -178,8 +160,10 @@ object SelfishVillager {
                 generalConfigPath.createFile()
                 generalConfigPath.writeText("{}")
             } catch (_: Exception) {}
-
-            general = json.decodeFromString(generalConfigPath.readText())
+            general =
+                GeneralConfig.CODEC.parse(
+                        JsonOps.INSTANCE, JsonHelper.deserialize(generalConfigPath.reader()))
+                    .orThrow
         }
 
         init {
