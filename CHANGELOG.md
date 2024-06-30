@@ -1,4 +1,9 @@
 
+## [0.4.1] - 2024-06-30
+### :bug: Bug Fixes
+- [`2ef4dea`](https://github.com/SettingDust/SelfishVillager/commit/2ef4deaaebde14df1d01cc891001a326a8bd2353) - 1.21 changed the tag path in datapack *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+
 ## [0.4.0] - 2024-06-22
 ### :recycle: Refactors
 - [`c297cb1`](https://github.com/SettingDust/SelfishVillager/commit/c297cb15e79bc5199c0e2ceb444cf188195da487) - port to 1.21 *(commit by [@SettingDust](https://github.com/SettingDust))*
@@ -48,3 +53,4 @@
 [0.3.0]: https://github.com/SettingDust/SelfishVillager/compare/0.2.0...0.3.0
 [0.3.1]: https://github.com/SettingDust/SelfishVillager/compare/0.3.0...0.3.1
 [0.4.0]: https://github.com/SettingDust/SelfishVillager/compare/0.3.1...0.4.0
+[0.4.1]: https://github.com/SettingDust/SelfishVillager/compare/0.4.0...0.4.1
