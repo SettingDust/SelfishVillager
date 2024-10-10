@@ -1,4 +1,12 @@
 
+## [0.5.1] - 2024-10-10
+### :bug: Bug Fixes
+- [`c768cb7`](https://github.com/SettingDust/SelfishVillager/commit/c768cb77584a664385c8b903a3707bb0e13fa592) - wrong version range *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+### :wrench: Chores
+- [`078782f`](https://github.com/SettingDust/SelfishVillager/commit/078782f0007d6e13097b1e8984e440f9cda02ec8) - missing icons *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+
 ## [0.5.0] - 2024-10-10
 ### :sparkles: New Features
 - [`61fb05d`](https://github.com/SettingDust/SelfishVillager/commit/61fb05de4808993c24019193e6beaa09e8d1b705) - support 1.21 + 1.20.1 *(commit by [@SettingDust](https://github.com/SettingDust))*
@@ -66,3 +74,4 @@
 [0.4.1]: https://github.com/SettingDust/SelfishVillager/compare/0.4.0...0.4.1
 [0.4.2]: https://github.com/SettingDust/SelfishVillager/compare/0.4.1...0.4.2
 [0.5.0]: https://github.com/SettingDust/SelfishVillager/compare/0.4.2...0.5.0
+[0.5.1]: https://github.com/SettingDust/SelfishVillager/compare/0.5.0...0.5.1
