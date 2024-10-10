@@ -1,4 +1,4 @@
-val minecraft = "1.21"
+val minecraft = "1.20.1"
 extra["minecraft"] = minecraft
 
 apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/common.gradle.kts")
@@ -11,12 +11,14 @@ apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/modmenu.gr
 apply("https://github.com/SettingDust/MinecraftGradleScripts/raw/main/yacl.gradle.kts")
 
 dependencyResolutionManagement.versionCatalogs.named("catalog") {
-    library("reputation", "maven.modrinth", "reputation-viewer").version("0.2.0")
-    library("jade", "maven.modrinth", "jade").version("15.0.4+fabric")
+    // https://modrinth.com/mod/reputation-viewer/versions
+    library("reputation", "maven.modrinth", "reputation-viewer").version("0.4.2")
+    // https://modrinth.com/mod/jade/versions
+    library("jade", "maven.modrinth", "jade").version("11.12.0+fabric")
 
     // https://modrinth.com/mod/guard-villagers-(fabricquilt)/versions
     library("guard-villagers", "maven.modrinth", "guard-villagers-(fabricquilt)")
-        .version("2.1.1-$minecraft")
+        .version("2.0.9-$minecraft")
 }
 
 plugins {
