@@ -1,4 +1,9 @@
 
+## [0.5.0] - 2024-10-10
+### :sparkles: New Features
+- [`61fb05d`](https://github.com/SettingDust/SelfishVillager/commit/61fb05de4808993c24019193e6beaa09e8d1b705) - support 1.21 + 1.20.1 *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+
 ## [0.4.2] - 2024-10-10
 ### :wrench: Chores
 - [`01b303d`](https://github.com/SettingDust/SelfishVillager/commit/01b303d0d001d4f3cf9e801da49c6498ccfe7cd9) - add icon and publish to CF *(commit by [@SettingDust](https://github.com/SettingDust))*
@@ -60,3 +65,4 @@
 [0.4.0]: https://github.com/SettingDust/SelfishVillager/compare/0.3.1...0.4.0
 [0.4.1]: https://github.com/SettingDust/SelfishVillager/compare/0.4.0...0.4.1
 [0.4.2]: https://github.com/SettingDust/SelfishVillager/compare/0.4.1...0.4.2
+[0.5.0]: https://github.com/SettingDust/SelfishVillager/compare/0.4.2...0.5.0
