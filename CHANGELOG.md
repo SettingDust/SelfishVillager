@@ -1,4 +1,9 @@
 
+## [0.4.2] - 2024-10-10
+### :wrench: Chores
+- [`01b303d`](https://github.com/SettingDust/SelfishVillager/commit/01b303d0d001d4f3cf9e801da49c6498ccfe7cd9) - add icon and publish to CF *(commit by [@SettingDust](https://github.com/SettingDust))*
+
+
 ## [0.4.1] - 2024-06-30
 ### :bug: Bug Fixes
 - [`2ef4dea`](https://github.com/SettingDust/SelfishVillager/commit/2ef4deaaebde14df1d01cc891001a326a8bd2353) - 1.21 changed the tag path in datapack *(commit by [@SettingDust](https://github.com/SettingDust))*
@@ -54,3 +59,4 @@
 [0.3.1]: https://github.com/SettingDust/SelfishVillager/compare/0.3.0...0.3.1
 [0.4.0]: https://github.com/SettingDust/SelfishVillager/compare/0.3.1...0.4.0
 [0.4.1]: https://github.com/SettingDust/SelfishVillager/compare/0.4.0...0.4.1
+[0.4.2]: https://github.com/SettingDust/SelfishVillager/compare/0.4.1...0.4.2
